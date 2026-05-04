@@ -1,0 +1,40 @@
+name: Feature Request
+description: Suggest an improvement.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: What would you like to happen?
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope Check
+      description: This package intentionally avoids payment, tax, invoices, and accounting.
+      options:
+        - Plan management
+        - Entitlements
+        - Usage tracking
+        - Trials
+        - Add-ons
+        - Billing adapter boundary
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered

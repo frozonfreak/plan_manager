@@ -1,0 +1,64 @@
+name: Bug Report
+description: Report a reproducible problem.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve Laravel Plan Manager.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps To Reproduce
+      description: Provide the smallest reproduction you can.
+      placeholder: |
+        1. Configure ...
+        2. Call ...
+        3. See ...
+    validations:
+      required: true
+  - type: input
+    id: package-version
+    attributes:
+      label: Package Version
+      placeholder: 0.1.0 or dev-main
+    validations:
+      required: true
+  - type: input
+    id: laravel-version
+    attributes:
+      label: Laravel Version
+      placeholder: 13.x
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP Version
+      placeholder: 8.3.x
+    validations:
+      required: true
+  - type: dropdown
+    id: database
+    attributes:
+      label: Database Driver
+      options:
+        - SQLite
+        - MySQL
+        - PostgreSQL
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional Context
+      description: Logs, stack traces, or config snippets. Remove secrets.

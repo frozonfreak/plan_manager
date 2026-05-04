@@ -1,0 +1,130 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: PHP ${{ matrix.php }} - ${{ matrix.database }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - '8.3'
+          - '8.4'
+        database:
+          - sqlite
+          - mysql
+          - pgsql
+
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: plan_manager_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: plan_manager_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d plan_manager_test"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, pdo, pdo_mysql, pdo_pgsql, sqlite
+          coverage: none
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Prepare test environment
+        run: |
+          if [ "${{ matrix.database }}" = "sqlite" ]; then
+            echo "DB_CONNECTION=sqlite" >> "$GITHUB_ENV"
+            echo "DB_DATABASE=:memory:" >> "$GITHUB_ENV"
+          elif [ "${{ matrix.database }}" = "mysql" ]; then
+            echo "DB_CONNECTION=mysql" >> "$GITHUB_ENV"
+            echo "DB_HOST=127.0.0.1" >> "$GITHUB_ENV"
+            echo "DB_PORT=3306" >> "$GITHUB_ENV"
+            echo "DB_DATABASE=plan_manager_test" >> "$GITHUB_ENV"
+            echo "DB_USERNAME=root" >> "$GITHUB_ENV"
+            echo "DB_PASSWORD=" >> "$GITHUB_ENV"
+          else
+            echo "DB_CONNECTION=pgsql" >> "$GITHUB_ENV"
+            echo "DB_HOST=127.0.0.1" >> "$GITHUB_ENV"
+            echo "DB_PORT=5432" >> "$GITHUB_ENV"
+            echo "DB_DATABASE=plan_manager_test" >> "$GITHUB_ENV"
+            echo "DB_USERNAME=postgres" >> "$GITHUB_ENV"
+            echo "DB_PASSWORD=postgres" >> "$GITHUB_ENV"
+          fi
+
+      - name: Run tests
+        run: composer test
+
+  formatting:
+    name: Code Style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Check formatting
+        run: composer format:test
+
+  composer:
+    name: Composer Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Validate composer.json
+        run: composer validate --strict

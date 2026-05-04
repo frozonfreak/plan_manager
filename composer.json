@@ -1,0 +1,75 @@
+{
+  "name": "frozonfreak/laravel-plan-manager",
+  "description": "Plan, entitlement, usage, add-on, and local trial management for Laravel SaaS applications.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "saas",
+    "plans",
+    "subscriptions",
+    "entitlements",
+    "usage",
+    "trials",
+    "addons",
+    "billing-adapter"
+  ],
+  "homepage": "https://github.com/FrozonFreak/laravel-plan-manager",
+  "authors": [
+    {
+      "name": "FrozonFreak",
+      "homepage": "https://github.com/FrozonFreak"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/FrozonFreak/laravel-plan-manager/issues",
+    "source": "https://github.com/FrozonFreak/laravel-plan-manager",
+    "security": "https://github.com/FrozonFreak/laravel-plan-manager/security/policy"
+  },
+  "require": {
+    "php": "^8.3",
+    "illuminate/contracts": "^13.0",
+    "illuminate/database": "^13.0",
+    "illuminate/support": "^13.0"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.18",
+    "orchestra/testbench": "^11.0",
+    "pestphp/pest": "^4.0",
+    "pestphp/pest-plugin-laravel": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "FrozonFreak\\PlanManager\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FrozonFreak\\PlanManager\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "FrozonFreak\\PlanManager\\PlanManagerServiceProvider"
+      ],
+      "aliases": {
+        "PlanManager": "FrozonFreak\\PlanManager\\Facades\\PlanManager"
+      }
+    }
+  },
+  "scripts": {
+    "test": "pest",
+    "test:coverage": "pest --coverage",
+    "format": "pint",
+    "format:test": "pint --test",
+    "analyse": "php -l src/PlanManager.php"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    },
+    "sort-packages": true
+  },
+  "prefer-stable": true
+}
