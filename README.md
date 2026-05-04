@@ -1,8 +1,7 @@
 # Laravel Plan Manager
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/frozonfreak/laravel-plan-manager.svg?style=flat-square)](https://packagist.org/packages/frozonfreak/laravel-plan-manager)
-[![Tests](https://img.shields.io/github/actions/workflow/status/FrozonFreak/laravel-plan-manager/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/FrozonFreak/laravel-plan-manager/actions/workflows/tests.yml)
-[![License](https://img.shields.io/packagist/l/frozonfreak/laravel-plan-manager.svg?style=flat-square)](LICENSE.md)
+[![Tests](https://img.shields.io/github/actions/workflow/status/frozonfreak/plan_manager/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/frozonfreak/plan_manager/actions/workflows/tests.yml)
+[![License](https://img.shields.io/github/license/frozonfreak/plan_manager.svg?style=flat-square)](LICENSE)
 
 `frozonfreak/laravel-plan-manager` is a Laravel package for centralizing SaaS plan rules, features, limits, usage meters, add-ons, previews, and local trial entitlement logic.
 
@@ -322,7 +321,7 @@ For security issues, do not open a public issue. Follow [SECURITY.md](SECURITY.m
 
 ## License
 
-Laravel Plan Manager is open-source software licensed under the [MIT license](LICENSE.md).
+Laravel Plan Manager is open-source software licensed under the [MIT license](LICENSE).
 
 ## Roadmap
 

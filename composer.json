@@ -14,7 +14,7 @@
     "addons",
     "billing-adapter"
   ],
-  "homepage": "https://github.com/FrozonFreak/laravel-plan-manager",
+  "homepage": "https://github.com/frozonfreak/plan_manager",
   "authors": [
     {
       "name": "FrozonFreak",
@@ -22,9 +22,9 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/FrozonFreak/laravel-plan-manager/issues",
-    "source": "https://github.com/FrozonFreak/laravel-plan-manager",
-    "security": "https://github.com/FrozonFreak/laravel-plan-manager/security/policy"
+    "issues": "https://github.com/frozonfreak/plan_manager/issues",
+    "source": "https://github.com/frozonfreak/plan_manager",
+    "security": "https://github.com/frozonfreak/plan_manager/security/policy"
   },
   "require": {
     "php": "^8.3",
